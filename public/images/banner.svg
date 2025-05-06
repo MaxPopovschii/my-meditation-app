@@ -1,0 +1,62 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Animated Gradient Background -->
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <animate attributeName="x1" values="0%;100%;0%" dur="20s" repeatCount="indefinite" />
+      <animate attributeName="y1" values="0%;100%;0%" dur="23s" repeatCount="indefinite" />
+      <stop offset="0%" stop-color="#1F2937">
+        <animate attributeName="stop-color" values="#1F2937;#111827;#1F2937" dur="7s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" stop-color="#111827">
+        <animate attributeName="stop-color" values="#111827;#1F2937;#111827" dur="7s" repeatCount="indefinite" />
+      </stop>
+    </linearGradient>
+    
+    <!-- Particle Effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="300" fill="url(#grad1)" />
+
+  <!-- Decorative Circles -->
+  <g class="particles">
+    <circle cx="200" cy="150" r="3" fill="#10B981" filter="url(#glow)">
+      <animate attributeName="cy" values="150;130;150" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="1000" cy="150" r="3" fill="#10B981" filter="url(#glow)">
+      <animate attributeName="cy" values="150;170;150" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Lotus Symbol -->
+  <g transform="translate(600, 120)" filter="url(#glow)">
+    <path d="M0,0 C-20,-20 -40,0 -20,20 C-40,40 -20,60 0,40 C20,60 40,40 20,20 C40,0 20,-20 0,0" 
+          fill="#10B981">
+      <animate attributeName="d" 
+               values="M0,0 C-20,-20 -40,0 -20,20 C-40,40 -20,60 0,40 C20,60 40,40 20,20 C40,0 20,-20 0,0;
+                      M0,-10 C-25,-25 -45,-5 -25,15 C-45,35 -25,55 -5,35 C15,55 35,35 15,15 C35,-5 15,-25 0,-10;
+                      M0,0 C-20,-20 -40,0 -20,20 C-40,40 -20,60 0,40 C20,60 40,40 20,20 C40,0 20,-20 0,0"
+               dur="8s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  <!-- App Name with Gradient -->
+  <text x="600" y="200" text-anchor="middle" font-size="48" font-family="Arial" fill="url(#textGradient)">
+    <tspan x="600" dy="0" class="app-name">Meditation App</tspan>
+    <tspan x="600" dy="40" font-size="24" fill="#9CA3AF">Trova la tua pace interiore</tspan>
+  </text>
+
+  <!-- Wave Animation -->
+  <path d="M0,280 Q300,260 600,280 Q900,300 1200,280" stroke="#10B981" stroke-width="2" fill="none">
+    <animate attributeName="d" 
+             values="M0,280 Q300,260 600,280 Q900,300 1200,280;
+                    M0,280 Q300,300 600,280 Q900,260 1200,280;
+                    M0,280 Q300,260 600,280 Q900,300 1200,280"
+             dur="10s" repeatCount="indefinite" />
+  </path>
+</svg>

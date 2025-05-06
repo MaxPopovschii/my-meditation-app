@@ -1,0 +1,18 @@
+.banner-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.2));
+  transition: all 0.3s ease;
+}
+
+.banner-container:hover {
+  filter: drop-shadow(0 0 30px rgba(16, 185, 129, 0.3));
+  transform: scale(1.01);
+}
+
+.banner-svg {
+  width: 100%;
+  height: auto;
+}
