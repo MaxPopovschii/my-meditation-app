@@ -82,22 +82,22 @@ export default function Timer() {
 
       <div className="bg-gray-800/40 p-12 rounded-3xl shadow-2xl w-full max-w-md relative backdrop-blur-xl 
                     border border-gray-700/50 hover:shadow-green-500/10 transition-all duration-500">
-        {/* Controls Header */}
+        {/* Controls Header with cursor-pointer */}
         <div className="absolute top-4 right-4 flex gap-3">
           <button
             onClick={() => setSoundEnabled(!soundEnabled)}
-            className="p-3 rounded-xl hover:bg-gray-700/50 transition-all duration-300 group"
+            className="p-3 rounded-xl hover:bg-gray-700/50 transition-all duration-300 group cursor-pointer"
           >
             {soundEnabled ? 
-              <FaVolumeUp className="text-green-500 w-5 h-5 group-hover:scale-110 transition-transform" /> : 
-              <FaVolumeMute className="text-gray-400 w-5 h-5 group-hover:scale-110 transition-transform" />
+              <FaVolumeUp className="text-green-500 w-5 h-5 group-hover:scale-110 transition-transform cursor-pointer" /> : 
+              <FaVolumeMute className="text-gray-400 w-5 h-5 group-hover:scale-110 transition-transform cursor-pointer" />
             }
           </button>
           <button
             onClick={() => setShowPresets(!showPresets)}
-            className="p-3 rounded-xl hover:bg-gray-700/50 transition-all duration-300 group"
+            className="p-3 rounded-xl hover:bg-gray-700/50 transition-all duration-300 group cursor-pointer"
           >
-            <FaBell className="w-5 h-5 text-green-500 group-hover:scale-110 transition-transform" />
+            <FaBell className="w-5 h-5 text-green-500 group-hover:scale-110 transition-transform cursor-pointer" />
           </button>
         </div>
 
@@ -106,7 +106,7 @@ export default function Timer() {
           <h2 className="text-3xl font-bold text-white">Timer di Meditazione</h2>
         </div>
 
-        {/* Presets Grid with Enhanced Styling */}
+        {/* Presets Grid with cursor-pointer */}
         {showPresets && (
           <div className="grid grid-cols-3 gap-3 mb-8 animate-fade-up">
             {presets.map((preset) => (
@@ -119,7 +119,7 @@ export default function Timer() {
                 }}
                 className="bg-gray-700/50 hover:bg-gray-600/50 text-white py-3 px-4 rounded-xl text-sm 
                          transition-all duration-300 hover:scale-105 hover:shadow-lg border border-gray-600/50
-                         backdrop-blur-sm"
+                         backdrop-blur-sm cursor-pointer"
               >
                 {preset.label}
               </button>
@@ -127,8 +127,8 @@ export default function Timer() {
           </div>
         )}
 
-        {/* Enhanced Timer Circle */}
-        <div className="relative mb-12 group">
+        {/* Timer Circle with cursor-pointer */}
+        <div className="relative mb-12 group cursor-pointer">
           <div className="w-56 h-56 mx-auto rounded-full border-8 border-gray-700/50 flex items-center 
                        justify-center relative overflow-hidden pulse-shadow">
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 to-emerald-500/20 animate-spin-slow" />
@@ -147,9 +147,9 @@ export default function Timer() {
           </div>
         </div>
 
-        {/* Enhanced Slider */}
+        {/* Slider with cursor-pointer */}
         <div className="mb-10">
-          <label className="block mb-3 text-gray-300 flex items-center justify-between">
+          <label className="block mb-3 text-gray-300 flex items-center justify-between cursor-pointer">
             <span className="text-lg">Durata della Meditazione</span>
             <span className="text-sm text-gray-400">1-60 min</span>
           </label>
@@ -169,12 +169,12 @@ export default function Timer() {
           <div className="text-center text-gray-400 mt-3 text-lg">{minutes} minuti</div>
         </div>
 
-        {/* Enhanced Control Buttons */}
+        {/* Control Buttons with cursor-pointer */}
         <div className="flex gap-4 justify-center">
           <button
             onClick={() => setIsRunning(!isRunning)}
             className={`flex items-center gap-3 px-8 py-4 rounded-xl text-lg font-medium
-                     transition-all duration-500 hover:scale-105 relative overflow-hidden group ${
+                     transition-all duration-500 hover:scale-105 relative overflow-hidden group cursor-pointer ${
               isRunning 
                 ? 'bg-red-500/80 hover:bg-red-600/80' 
                 : 'bg-green-500/80 hover:bg-green-600/80'
@@ -189,7 +189,7 @@ export default function Timer() {
           <button
             onClick={resetTimer}
             className="flex items-center gap-2 bg-gray-600/50 hover:bg-gray-700/50 px-8 py-4 rounded-xl 
-                     transition-all duration-300 hover:scale-105 backdrop-blur-sm text-lg font-medium"
+                     transition-all duration-300 hover:scale-105 backdrop-blur-sm text-lg font-medium cursor-pointer"
           >
             <FaRedo className="text-gray-300" /> Reset
           </button>

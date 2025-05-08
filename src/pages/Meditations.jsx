@@ -9,11 +9,12 @@ const MeditationCard = ({ meditation, index, onSelect }) => (
     className="bg-gray-800/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg 
                hover:shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-500 
                hover:scale-105 group animate-fade-up will-change-transform
-               w-full flex flex-col"
+               w-full flex flex-col cursor-pointer"
     style={{ 
       animationDelay: `${index * 0.1}s`,
       '--gradient': meditation.gradient 
     }}
+    onClick={() => onSelect(index)}
   >
     <div className="h-52 bg-gradient-to-br group-hover:opacity-90 
                    transition-all duration-500 relative overflow-hidden shrink-0"
@@ -57,7 +58,7 @@ const MeditationCard = ({ meditation, index, onSelect }) => (
                    py-4 px-6 rounded-xl flex items-center justify-center gap-3 
                    transition-all duration-500 transform hover:scale-105 
                    hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] relative overflow-hidden 
-                   group/btn will-change-transform"
+                   group/btn will-change-transform cursor-pointer"
         >
           <span className="relative z-10 flex items-center gap-2">
             <FaPlay className="transition-transform group-hover/btn:translate-x-1" />

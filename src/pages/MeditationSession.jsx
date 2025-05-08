@@ -68,7 +68,8 @@ export default function MeditationSession() {
       <div className="max-w-4xl mx-auto">
         <button 
           onClick={() => navigate('/meditations')}
-          className="mb-8 text-gray-400 hover:text-white flex items-center gap-2"
+          className="mb-8 text-gray-400 hover:text-white flex items-center gap-2 cursor-pointer 
+                 transition-colors duration-300"
         >
           <FaArrowLeft /> Torna alle meditazioni
         </button>
@@ -83,7 +84,8 @@ export default function MeditationSession() {
           </div>
 
           <div className="relative mb-12">
-            <div className="w-48 h-48 mx-auto rounded-full border-8 border-gray-700 flex items-center justify-center relative">
+            <div className="w-48 h-48 mx-auto rounded-full border-8 border-gray-700 flex items-center 
+                       justify-center relative">
               <div 
                 className="absolute inset-0 rounded-full"
                 style={{
@@ -101,7 +103,8 @@ export default function MeditationSession() {
           <div className="flex justify-center gap-4">
             <button
               onClick={togglePlay}
-              className={`px-8 py-4 rounded-lg flex items-center gap-2 ${
+              className={`px-8 py-4 rounded-lg flex items-center gap-2 cursor-pointer 
+                     transition-all duration-300 hover:scale-105 ${
                 isRunning 
                   ? 'bg-red-500 hover:bg-red-600' 
                   : 'bg-green-500 hover:bg-green-600'
@@ -115,7 +118,9 @@ export default function MeditationSession() {
                 setIsRunning(false);
                 audioRef.current.currentTime = 0;
               }}
-              className="px-8 py-4 rounded-lg bg-gray-700 hover:bg-gray-600 text-white flex items-center gap-2"
+              className="px-8 py-4 rounded-lg bg-gray-700 hover:bg-gray-600 text-white 
+                     flex items-center gap-2 cursor-pointer transition-all duration-300 
+                     hover:scale-105"
             >
               <FaRedo /> Reset
             </button>

@@ -237,3 +237,153 @@ input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
 }
+
+/* Custom scrollbar for the sessions list */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 197, 94, 0.5) rgba(0, 0, 0, 0);
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 197, 94, 0.5);
+  border-radius: 20px;
+}
+
+/* Calendar customization */
+.react-calendar {
+  background: transparent !important;
+  border: none !important;
+  font-family: inherit !important;
+}
+
+.react-calendar button {
+  color: #fff !important;
+}
+
+.react-calendar__tile {
+  @apply text-gray-300 hover:bg-gray-700 rounded-lg;
+}
+
+.react-calendar__tile--active {
+  background: #22c55e !important;
+  border-radius: 9999px;
+  @apply bg-green-500 text-white;
+}
+
+.react-calendar__tile--now {
+  background: rgba(34, 197, 94, 0.2) !important;
+  border-radius: 9999px;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: rgba(34, 197, 94, 0.3) !important;
+  border-radius: 9999px;
+}
+
+.react-calendar__navigation button {
+  @apply text-white hover:bg-gray-700 rounded-lg;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  @apply text-red-400;
+}
+
+/* Modal animations */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.3s ease-out;
+}
+
+/* Base cursor styles */
+* {
+  cursor: default;
+}
+
+/* Interactive elements */
+button,
+input,
+select,
+textarea,
+a,
+[role="button"],
+.clickable {
+  cursor: pointer;
+}
+
+/* Text inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+textarea {
+  cursor: text;
+}
+
+/* Resize cursor for textareas */
+textarea {
+  cursor: auto;
+  resize: vertical;
+}
+
+/* Help cursor for tooltip elements */
+[data-tooltip],
+[aria-label] {
+  cursor: help;
+}
+
+/* Moving cursor for draggable elements */
+[draggable="true"] {
+  cursor: move;
+}
+
+/* Custom cursor for disabled elements */
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled,
+.disabled {
+  cursor: not-allowed;
+}
+
+/* Loading state cursor */
+.loading,
+.processing,
+[aria-busy="true"] {
+  cursor: wait;
+}
+
+/* Zoom cursor for images or maps */
+.zoomable,
+[data-zoom] {
+  cursor: zoom-in;
+}
+
+/* Precise clicking cursor */
+.precise-click {
+  cursor: crosshair;
+}
+
+/* Text selection cursor */
+.selectable-text {
+  cursor: text;
+}

@@ -76,25 +76,31 @@ export default function Sounds() {
               key={i}
               className="bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg 
                        hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] transition-all duration-500 
-                       hover:scale-105 group animate-fade-up border border-gray-700/50"
+                       hover:scale-105 group animate-fade-up border border-gray-700/50 
+                       cursor-pointer"
               style={{ animationDelay: `${i * 0.1}s` }}
+              onClick={() => toggleSound(i)}
             >
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <span className="text-4xl group-hover:scale-110 transition-transform duration-300 
-                                relative animate-wave" style={{ animationDelay: `${i * 0.2}s` }}>
+                                relative animate-wave cursor-pointer" 
+                        style={{ animationDelay: `${i * 0.2}s` }}>
                     {sound.icon}
                   </span>
                   <span className="text-2xl font-medium bg-gradient-to-r from-white to-gray-300 
                                 text-transparent bg-clip-text group-hover:from-blue-400 
-                                group-hover:to-purple-400 transition-all duration-300">
+                                group-hover:to-purple-400 transition-all duration-300 cursor-pointer">
                     {sound.name}
                   </span>
                 </div>
                 <button
-                  onClick={() => toggleSound(i)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleSound(i);
+                  }}
                   className={`p-4 rounded-full transition-all duration-300 relative 
-                           hover:scale-110 pulse-ring ${
+                           hover:scale-110 pulse-ring cursor-pointer ${
                     playing[i]
                       ? 'bg-red-500 hover:bg-red-600'
                       : 'bg-blue-500 hover:bg-blue-600'
@@ -105,9 +111,9 @@ export default function Sounds() {
               </div>
 
               <div className="flex items-center space-x-4 relative">
-                <FaVolumeUp className={`transition-colors duration-300 
+                <FaVolumeUp className={`transition-colors duration-300 cursor-pointer
                                     ${playing[i] ? 'text-blue-400' : 'text-gray-400'}`} />
-                <div className="relative w-full h-2 bg-gray-700/50 rounded-full overflow-hidden">
+                <div className="relative w-full h-2 bg-gray-700/50 rounded-full overflow-hidden cursor-pointer">
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 
                               blur-sm transform -translate-x-full animate-wave" 
                        style={{ animationDelay: '1s' }} />

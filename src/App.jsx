@@ -1,6 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'));
@@ -16,24 +20,100 @@ const LoadingSpinner = () => (
   </div>
 );
 
+// Protected Route component
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
+// Auth Route component
+const AuthRoute = ({ children }) => {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
+
 function App() {
   return (
-    <Router>
-      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen">
-        <Navbar />
-        <Suspense fallback={<LoadingSpinner />}>
-          <main className="container mx-auto px-4">
+    <AuthProvider>
+      <Router>
+        <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white min-h-screen">
+          <Suspense fallback={<LoadingSpinner />}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/meditations" element={<Meditations />} />
-              <Route path="/meditation/:id" element={<MeditationSession />} />
-              <Route path="/timer" element={<Timer />} />
-              <Route path="/sounds" element={<Sounds />} />
+              {/* Auth Routes */}
+              <Route path="/login" element={
+                <AuthRoute>
+                  <Login />
+                </AuthRoute>
+              } />
+              <Route path="/register" element={
+                <AuthRoute>
+                  <Register />
+                </AuthRoute>
+              } />
+              
+              {/* Protected Routes */}
+              <Route path="/" element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <Home />
+                </ProtectedRoute>
+              } />
+              <Route path="/meditations" element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <Meditations />
+                </ProtectedRoute>
+              } />
+              <Route path="/meditation/:id" element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <MeditationSession />
+                </ProtectedRoute>
+              } />
+              <Route path="/timer" element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <Timer />
+                </ProtectedRoute>
+              } />
+              <Route path="/sounds" element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <Sounds />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Navbar />
+                  <Profile />
+                </ProtectedRoute>
+              } />
+
+              {/* Catch all route */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-          </main>
-        </Suspense>
-      </div>
-    </Router>
+          </Suspense>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
