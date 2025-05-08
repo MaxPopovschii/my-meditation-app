@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle with Gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F2937" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+    
+    <linearGradient id="symbolGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="256" cy="256" r="256" fill="url(#bgGradient)" />
+  
+  <!-- Meditation Figure Glow -->
+  <path d="M256 128C309 128 352 171 352 224C352 277 309 320 256 320C203 320 160 277 160 224C160 171 203 128 256 128Z
+           M256 352C176 352 112 395 112 448H400C400 395 336 352 256 352Z" 
+        fill="url(#symbolGradient)"
+        filter="url(#glow)"
+        opacity="0.5" />
+  
+  <!-- Meditation Figure -->
+  <path d="M256 128C309 128 352 171 352 224C352 277 309 320 256 320C203 320 160 277 160 224C160 171 203 128 256 128Z
+           M256 352C176 352 112 395 112 448H400C400 395 336 352 256 352Z" 
+        fill="url(#symbolGradient)" />
+  
+  <!-- Center Circle -->
+  <circle cx="256" cy="224" r="32" fill="#1F2937" />
+</svg>

@@ -1,72 +1,143 @@
 @import "tailwindcss";
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-10px) rotate(2deg); 
+  }
 }
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  0%, 100% { 
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.05);
+  }
 }
 
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
+  will-change: opacity, transform;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.3s ease-in-out;
+  animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
 
 @keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from { 
+    transform: rotate(0deg) scale(1);
+  }
+  to { 
+    transform: rotate(360deg) scale(1.05);
+  }
 }
 
 .animate-spin-slow {
   animation: spin-slow 12s linear infinite;
+  will-change: transform;
 }
 
 @keyframes shine {
-  from { background-position: 200% center; }
-  to { background-position: -200% center; }
+  from { 
+    background-position: 200% center;
+    opacity: 0.8;
+  }
+  to { 
+    background-position: -200% center;
+    opacity: 1;
+  }
 }
 
 .shine-gradient {
   background: linear-gradient(
     90deg,
     rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.2) 25%,
-    rgba(255,255,255,0.2) 75%,
+    rgba(255,255,255,0.3) 25%,
+    rgba(255,255,255,0.3) 75%,
     rgba(255,255,255,0) 100%
   );
   background-size: 200% auto;
   animation: shine 3s linear infinite;
+  will-change: background-position, opacity;
 }
 
 @keyframes glow {
-  0%, 100% { filter: drop-shadow(0 0 1rem rgba(34, 197, 94, 0.3)); }
-  50% { filter: drop-shadow(0 0 2rem rgba(34, 197, 94, 0.6)); }
+  0%, 100% { 
+    filter: drop-shadow(0 0 1rem rgba(34, 197, 94, 0.3));
+    transform: scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 2rem rgba(34, 197, 94, 0.6));
+    transform: scale(1.02);
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
 }
 
 @keyframes cosmic-background {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%, 100% { 
+    background-position: 0% 50%;
+    filter: brightness(1);
+  }
+  50% { 
+    background-position: 100% 50%;
+    filter: brightness(1.1);
+  }
+}
+
+.cosmic-background {
+  background: linear-gradient(
+    45deg, 
+    #0f172a, 
+    #1e293b, 
+    #1a1c2c,
+    #0f172a
+  );
+  background-size: 400% 400%;
+  animation: cosmic-background 15s ease infinite;
+  will-change: background-position, filter;
 }
 
 @keyframes particle-flow {
-  0% { transform: translateY(0) translateX(0); opacity: 0; }
-  50% { opacity: 0.5; }
-  100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
 }
 
 @keyframes breathe {
@@ -74,9 +145,17 @@
   50% { transform: scale(1.2); opacity: 0.7; }
 }
 
+.animate-breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
 @keyframes rotate-gradient {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.animate-rotate {
+  animation: rotate-gradient 20s linear infinite;
 }
 
 @keyframes pulse-shadow {
@@ -84,9 +163,17 @@
   50% { box-shadow: 0 0 30px 10px rgba(16, 185, 129, 0.2); }
 }
 
+.pulse-shadow {
+  animation: pulse-shadow 2s ease-in-out infinite;
+}
+
 @keyframes wave {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+.animate-wave {
+  animation: wave 3s ease-in-out infinite;
 }
 
 @keyframes pulse-ring {
@@ -95,14 +182,19 @@
   100% { transform: scale(1.4); opacity: 0; }
 }
 
-.animate-glow {
-  animation: glow 3s ease-in-out infinite;
+.pulse-ring {
+  position: relative;
+  overflow: visible;
 }
 
-.cosmic-background {
-  background: linear-gradient(45deg, #0f172a, #1e293b, #1a1c2c);
-  background-size: 400% 400%;
-  animation: cosmic-background 15s ease infinite;
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+  background: inherit;
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  will-change: transform, opacity;
 }
 
 @keyframes fadeUp {
@@ -120,43 +212,28 @@
   animation: fadeUp 0.6s ease-out forwards;
 }
 
-.animate-breathe {
-  animation: breathe 4s ease-in-out infinite;
-}
-
-.animate-rotate {
-  animation: rotate-gradient 20s linear infinite;
-}
-
-.pulse-shadow {
-  animation: pulse-shadow 2s ease-in-out infinite;
-}
-
-.animate-wave {
-  animation: wave 3s ease-in-out infinite;
-}
-
-.pulse-ring::before {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  border-radius: inherit;
-  background: inherit;
-  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
 @supports (backdrop-filter: blur(4px)) {
   .backdrop-blur-sm {
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
+}
+
+input[type="range"] {
+  @apply h-2 rounded-lg appearance-none bg-gray-700/50;
+  transition: all 0.3s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  background: #10B981;
-  border-radius: 50%;
-  cursor: pointer;
+  @apply w-4 h-4 bg-green-500 rounded-full cursor-pointer;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+  transition: all 0.3s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  @apply bg-green-400;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
 }

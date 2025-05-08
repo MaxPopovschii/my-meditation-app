@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { GiMeditation, GiLotus, GiNightSky } from 'react-icons/gi';
 import { FaHeadphones, FaClock, FaLeaf, FaWater, FaMoon, FaSun, FaYinYang, FaStarOfLife } from 'react-icons/fa';
@@ -6,11 +6,48 @@ import { FaHeadphones, FaClock, FaLeaf, FaWater, FaMoon, FaSun, FaYinYang, FaSta
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+  // Debounced scroll handler with throttling
+  const handleScroll = useCallback(() => {
+    let ticking = false;
+
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        setScrollY(window.pageYOffset * 0.5); // Reduced multiplier for smoother effect
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
+
+  // Memoize positions to prevent recalculation
+  const { starsPositions, particlesPositions } = useMemo(() => ({
+    starsPositions: Array(30).fill().map(() => ({ // Reduced number of stars
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: `${Math.random() * 4 + 2}px`,
+    })),
+    particlesPositions: Array(20).fill().map(() => ({ // Reduced number of particles
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: Math.random() * 6 + 3,
+      duration: Math.random() * 10 + 5,
+      delay: Math.random() * 5,
+    })),
+  }), []);
+
+  // Memoize transform styles
+  const getTransformStyle = useCallback((multiplier = 0.3) => {
+    const yOffset = Math.min(scrollY * multiplier, 60); // Limited max translation
+    return {
+      transform: `translate3d(0, ${yOffset}px, 0)`, // Using translate3d for hardware acceleration
+      willChange: 'transform',
+    };
+  }, [scrollY]);
 
   const features = [
     {
@@ -38,59 +75,27 @@ export default function Home() {
 
   return (
     <div className="min-h-screen cosmic-background overflow-hidden">
-      {/* Parallax Stars Background */}
+      {/* Optimized Stars Background */}
       <div className="fixed inset-0 pointer-events-none">
-        {[...Array(50)].map((_, i) => (
+        {starsPositions.map((pos, i) => (
           <FaStarOfLife
             key={i}
             className="absolute text-white/20"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              fontSize: `${Math.random() * 4 + 2}px`,
-              transform: `translateY(${scrollY * 0.5}px)`,
-              transition: 'transform 0.1s linear',
+              ...pos,
+              fontSize: pos.size,
+              ...getTransformStyle(0.2),
             }}
           />
         ))}
       </div>
 
-      {/* Hero Section with Enhanced Animation */}
-      <div className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 opacity-30">
-            <FaYinYang 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                        w-[40rem] h-[40rem] text-gray-700 opacity-5 animate-spin-slow" 
-            />
-            <div className="absolute top-10 left-10 animate-glow">
-              <FaSun className="w-12 h-12 text-yellow-500/50 animate-spin-slow" />
-            </div>
-            <div className="absolute bottom-20 right-20 animate-glow">
-              <FaMoon className="w-10 h-10 text-blue-500/50" />
-            </div>
-            
-            {/* Floating Particles with Flow Effect */}
-            {[...Array(40)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full blur-sm"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  width: `${Math.random() * 6 + 3}px`,
-                  height: `${Math.random() * 6 + 3}px`,
-                  animation: `particle-flow ${Math.random() * 10 + 5}s linear infinite`,
-                  animationDelay: `${Math.random() * 5}s`
-                }}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Enhanced Hero Content */}
-        <div className="relative z-10 text-center px-4 py-20 transform" 
-             style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
+      {/* Hero Section with Optimized Animation */}
+      <div className="relative min-h-[90vh] flex items-center justify-center">
+        <div 
+          className="relative z-10 text-center px-4 py-20" 
+          style={getTransformStyle(0.1)}
+        >
           <div className="text-green-500 text-8xl mb-12 relative">
             <GiLotus className="inline-block animate-float animate-glow transform hover:scale-110 transition-transform duration-300" />
             <div className="absolute -inset-8 bg-green-500 opacity-20 blur-2xl rounded-full" />
