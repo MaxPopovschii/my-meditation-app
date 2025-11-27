@@ -1,4 +1,4 @@
-# 🧘 Meditation App
+# 🧘 Serenity OS
 
 <div align="center" class="banner-container">
 
